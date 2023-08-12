@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Card from '../components/Card'
 
-export default function Home() {
+export default function Home({ products }) {
+  // console.log(products);
   return (
     <div>
       <Head>
@@ -15,8 +17,25 @@ export default function Home() {
       <h1 className="text-3xl font-bold text-center">
         Home Page
       </h1>
-      <Link href={'/products'}>go to products page</Link>
+      <div className='card-main grid sm:grid-cols-2 md:grid-cols-3 grid-cols-4 sm:px-3 gap-3'>
+        {
+          products.map(product => {
+            return <Card productFromIndex={product} key={product._id} />
 
+          })
+        }
+      </div>
     </div>
   )
+}
+
+
+export async function getStaticProps() {
+  const response = await fetch('http://localhost:3000/api/products')
+  const data = await response.json()
+  return {
+    props: {
+      products: data
+    }
+  }
 }
