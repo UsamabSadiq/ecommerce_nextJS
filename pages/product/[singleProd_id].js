@@ -11,7 +11,7 @@ const singleProduct = ({ product }) => {
                 <FaRegTrashCan /> Delete</button>
 
             {showModal &&
-                <Modal onClose={() => setShowModal(false)} />
+                <Modal fetchedProductData={product} onClose={() => setShowModal(false)} />
             }
 
             <div className="container px-5 pb-24 pt-12 mx-auto">
