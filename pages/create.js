@@ -7,10 +7,24 @@ const create = () => {
     const [image, setImage] = useState("")
     const [description, setDescription] = useState("")
 
-
+    //  Function for uploading images(files) get from google//
+    const imageUpload = async () => {
+        const formData = new FormData()
+        formData.append('file', image) // file = type of data we are ending from frontend, wo data hamari state image ma store ha.
+        formData.append('upload_preset', 'my_store') // from cloudinary
+        formData.append('cloud_name', 'altan')
+        const res = await fetch('https://api.cloudinary.com/v1_1/altan/image/upload', {
+            method: 'POST',
+            body: formData
+        })
+        const res2 = await res.json()
+        console.log(res2);
+        return res2.url
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const image = await imageUpload()
         // console.log(name, price, image, description);    
         const res = await fetch('http://localhost:3000/api/products', {
             method: 'POST', // request ka method
@@ -25,24 +39,24 @@ const create = () => {
         });
         const res2 = await res.json()
         if (res2.error) {
-            // console.log(error);
-            alert('error....')
+            alert(res2.error)
+        } else {
+            alert('Product Saved!!')
         }
     }
 
     return (
         <>
-
             <form method='POST' className="flex items-center justify-center " onSubmit={handleSubmit}>
                 <div className="grid grid-cols-2  gap-3 mx-auto md:w-[60%]">
                     <div>
                         <label htmlFor="name" className="block mb-2 text-sm font-medium ">Product Name</label>
-                        <input type="text" id="name" name="name" onChange={(e) => { setName(e.target.value) }} value={name} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="mobile" required />
+                        <input type="text" id="name" name="name" onChange={(e) => { setName(e.target.value) }} value={name} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="mobile" />
                     </div>
 
                     <div>
                         <label htmlFor="price" className="block mb-2 text-sm font-medium ">Price</label>
-                        <input type="number" id="price" name="price" onChange={(e) => { setPrice(e.target.value) }} value={price} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="$00.00" required />
+                        <input type="number" id="price" name="price" onChange={(e) => { setPrice(e.target.value) }} value={price} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="$00.00" />
                     </div>
 
                     <div className="col-span-2">

@@ -6,7 +6,7 @@ const Card = ({ productFromIndex }) => {
         <>
             <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow overflow-hidden dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
-                    <img className="rounded-t-lg hover:scale-105 duration-150" src={productFromIndex.mediaUrl} alt="" />
+                    <img className="rounded-t-lg hover:scale-105 duration-150" src={productFromIndex.image} alt="" />
                 </a>
                 <div className="p-5">
                     <a href="#">

@@ -44,7 +44,7 @@ const singleProduct = ({ product }) => {
                             </button> */}
                         </div>
                     </div>
-                    <img alt="Product-Image" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src={product.mediaUrl} />
+                    <img alt="Product-Image" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src={product.image} />
                 </div>
             </div>
         </section>

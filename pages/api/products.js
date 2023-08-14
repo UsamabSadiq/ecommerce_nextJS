@@ -28,18 +28,16 @@ const getAllProducts = async function (req, res) {
 
 // Saving Products to DB
 const saveProducts = async function (req, res) {
-  try {
-    const { name, price, image, description } = req.body
-    console.log('body-request', name, price, image, description);
-    if (!name || !price || !image || !description) {
-      res.status(422).json({ message: 'Improper data' })
-    }
-    const newCreatedProduct = await new Product({
-      name, price, image, description
-    }).save()
-    console.log('New Product Created', newCreatedProduct);
-    res.status(200).json(newCreatedProduct)
-  } catch (error) {
-    console.log(error);
+
+  const { name, price, image, description } = req.body
+  // console.log('body-request', name, price, image, description);
+  if (!name || !price || !image || !description) {
+    res.status(422).json({ error: 'Plz Add All Fields!!' })
   }
+  const newCreatedProduct = await new Product({
+    name, price, image, description
+  }).save()
+  // console.log('New Product Created', newCreatedProduct);
+  res.status(200).json(newCreatedProduct)
+
 }
