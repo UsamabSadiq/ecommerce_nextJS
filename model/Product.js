@@ -13,7 +13,7 @@ const productSchema = new mongoose.Schema({
         type: Number,
         requird: true
     },
-    mediaUrl: {
+    image: {
         type: String,
         required: true
     }

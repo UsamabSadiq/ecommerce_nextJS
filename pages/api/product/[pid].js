@@ -1,7 +1,5 @@
 import Product from "../../../model/Product"
 
-
-
 export default async (req, res) => {
     switch (req.method) {
         case "GET":
